@@ -62,9 +62,11 @@ export const Header: React.FunctionComponent<IHeaderProps> = ({ title }) => {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <Button color="inherit" onClick={onCartClick}>
-            My cart
-          </Button>
+          {["Goods", "Contact Information", "About Us"].includes(title) && (
+            <Button color="inherit" onClick={onCartClick}>
+              My cart
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
