@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART } from "../constants";
-import { IStore, IAction } from "../types/store.types";
+import { ProductActionTypes } from "../types/product.types";
+import { IStore } from "../types/store.types";
 
 const initialState: IStore = {
   products: [
@@ -71,7 +72,7 @@ const initialState: IStore = {
   productsInCart: [],
 };
 
-export const productReducer: Reducer<IStore, IAction> = (
+export const productReducer: Reducer<IStore, ProductActionTypes> = (
   state = initialState,
   action
 ): IStore => {

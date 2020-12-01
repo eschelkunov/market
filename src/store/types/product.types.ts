@@ -10,7 +10,7 @@ export interface IProduct {
 export interface IProductList {
   products: IProduct[];
 }
-export interface IFetchProductsAction {
+export interface IFetchProducts {
   type: typeof FETCH_PRODUCTS;
   payload: IProduct[];
 }
@@ -20,4 +20,4 @@ interface IAddProductToCart {
   payload: IProduct;
 }
 
-export type ProductActionTypes = IFetchProductsAction | IAddProductToCart;
+export type ProductActionTypes = IFetchProducts | IAddProductToCart;

@@ -1,7 +1,6 @@
 import { ActionCreator } from "@reduxjs/toolkit";
 import React from "react";
-import { IProduct } from "../../store/types/product.types";
-import { IAction } from "../../store/types/store.types";
+import { IProduct, ProductActionTypes } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
 import { Product } from "../Product/Product";
@@ -9,7 +8,7 @@ import { SCProductList } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  addProductToCart: ActionCreator<IAction>;
+  addProductToCart: ActionCreator<ProductActionTypes>;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({

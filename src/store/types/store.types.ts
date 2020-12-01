@@ -4,8 +4,3 @@ export interface IStore {
   products: IProduct[];
   productsInCart: IProduct[];
 }
-
-export interface IAction {
-  type: string;
-  payload: any;
-}
