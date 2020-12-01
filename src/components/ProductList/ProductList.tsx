@@ -1,13 +1,34 @@
+import { ActionCreator } from "@reduxjs/toolkit";
 import React from "react";
+import { IProduct } from "../../store/types/product.types";
+import { IAction } from "../../store/types/store.types";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
-import { IProductList } from "../interfaces";
 import { Product } from "../Product/Product";
 import { SCProductList } from "./ProductList.style";
 
-export const ProductList: React.FunctionComponent<IProductList> = ({
+interface IProductListProps {
+  products: IProduct[];
+  addProductToCart: ActionCreator<IAction>;
+}
+
+export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
+  addProductToCart,
 }) => {
+  const onAddToCart = ({
+    productId,
+    imageURL,
+    productName,
+    productPrice,
+  }: IProduct) => {
+    addProductToCart({
+      productId,
+      imageURL,
+      productName,
+      productPrice,
+    });
+  };
   return (
     <>
       <Header title="Goods" />
@@ -18,7 +39,9 @@ export const ProductList: React.FunctionComponent<IProductList> = ({
             imageURL={imageURL}
             productName={productName}
             productPrice={productPrice}
-            onAdd={() => alert("Added to the cart!")}
+            onAdd={() =>
+              onAddToCart({ productId, imageURL, productName, productPrice })
+            }
           />
         ))}
       </SCProductList>

@@ -1,5 +1,6 @@
-import { FETCH_PRODUCTS } from "./constants";
-import { IAction, IStore } from "./store.types";
+import { Reducer } from "redux";
+import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART } from "../constants";
+import { IStore, IAction } from "../types/store.types";
 
 const initialState: IStore = {
   products: [
@@ -66,31 +67,26 @@ const initialState: IStore = {
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
     },
-    {
-      productId: 10,
-      productName: "Some name 7",
-      productPrice: 100,
-      imageURL:
-        "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
-    },
-    {
-      productId: 11,
-      productName: "Some name 7",
-      productPrice: 100,
-      imageURL:
-        "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
-    },
   ],
+  productsInCart: [],
 };
 
-export const productReducer = (state = initialState, action: IAction) => {
+export const productReducer: Reducer<IStore, IAction> = (
+  state = initialState,
+  action
+): IStore => {
   switch (action.type) {
     case FETCH_PRODUCTS:
-      return state;
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case ADD_PRODUCT_TO_CART:
+      return {
+        ...state,
+        productsInCart: [...state.productsInCart, action.payload],
+      };
     default:
       return state;
   }
 };
-
-// Action creators
-export const fetchProducts = () => ({ type: FETCH_PRODUCTS });

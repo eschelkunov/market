@@ -1,10 +1,11 @@
-import { IProduct } from "../components/interfaces";
+import { IProduct } from "./product.types";
 
 export interface IStore {
   products: IProduct[];
+  productsInCart: IProduct[];
 }
 
 export interface IAction {
   type: string;
-  payload?: { id?: number };
+  payload: any;
 }
