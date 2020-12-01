@@ -12,8 +12,4 @@ export const SCFooter = styled.div`
   line-height: 3.6;
   color: #fff;
   background-color: #3f51b5;
-  height: 50px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 `;

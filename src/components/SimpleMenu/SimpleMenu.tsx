@@ -1,8 +1,8 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { ABOUT, ADMIN, CONTACT_US, GOODS } from "../AppRoutes";
+import { useHistory } from "react-router-dom";
 
 interface IMenuProps {
   anchorEl: Element | null;

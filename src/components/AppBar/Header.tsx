@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,11 +8,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { SimpleMenu } from "../SimpleMenu/SimpleMenu";
-import { CART } from "../AppRoutes";
-
-interface IHeaderProps {
-  title: string;
-}
+import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "../AppRoutes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +22,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header: React.FunctionComponent<IHeaderProps> = ({ title }) => {
+export const Header: React.FunctionComponent = () => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+
+  const handleHeaderName = (locationPath: string) => {
+    switch (locationPath) {
+      case GOODS:
+        return "Goods";
+      case CONTACT_US:
+        return "Contact Information";
+      case ABOUT:
+        return "About Us";
+      case ADMIN:
+        return "Admin panel";
+      case CART:
+        return "My Cart";
+      default:
+        return "";
+    }
+  };
 
   const onMenuClick = (event: SyntheticEvent) => {
     setAnchorEl(event.currentTarget);
@@ -60,9 +74,11 @@ export const Header: React.FunctionComponent<IHeaderProps> = ({ title }) => {
           <SimpleMenu anchorEl={anchorEl} close={handleClose} />
 
           <Typography variant="h6" className={classes.title}>
-            {title}
+            {handleHeaderName(location.pathname)}
           </Typography>
-          {["Goods", "Contact Information", "About Us"].includes(title) && (
+          {["Goods", "Contact Information", "About Us"].includes(
+            handleHeaderName(location.pathname)
+          ) && (
             <Button color="inherit" onClick={onCartClick}>
               My cart
             </Button>
