@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import Button from "@material-ui/core/Button/Button";
 
+export const SCCartWrapper = styled.div`
+  padding-bottom: 2.5rem;
+`;
+
 export const SCCart = styled.div`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: bold;

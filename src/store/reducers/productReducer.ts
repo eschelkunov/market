@@ -92,7 +92,6 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
         productsInCart: [...state.productsInCart, action.payload],
       };
     case REMOVE_PRODUCT_FROM_CART:
-      debugger;
       return {
         ...state,
         productsInCart: state.productsInCart.filter(

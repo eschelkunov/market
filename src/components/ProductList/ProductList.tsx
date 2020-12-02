@@ -1,8 +1,10 @@
 import { ActionCreator } from "@reduxjs/toolkit";
 import React from "react";
 import { IProduct, ProductActionTypes } from "../../store/types/product.types";
+import { Header } from "../AppBar/Header";
+import { Footer } from "../Footer/Footer";
 import { Product } from "../Product/Product";
-import { SCProductList } from "./ProductList.style";
+import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
@@ -27,18 +29,31 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
     });
   };
   return (
-    <SCProductList>
-      {products.map(({ productId, imageURL, productName, productPrice }) => (
-        <Product
-          key={productId}
-          imageURL={imageURL}
-          productName={productName}
-          productPrice={productPrice}
-          onAdd={() =>
-            onAddToCart({ productId, imageURL, productName, productPrice })
-          }
-        />
-      ))}
-    </SCProductList>
+    <>
+      <Header />
+      <SCContentWrapper>
+        <SCProductList>
+          {products.map(
+            ({ productId, imageURL, productName, productPrice }) => (
+              <Product
+                key={productId}
+                imageURL={imageURL}
+                productName={productName}
+                productPrice={productPrice}
+                onAdd={() =>
+                  onAddToCart({
+                    productId,
+                    imageURL,
+                    productName,
+                    productPrice,
+                  })
+                }
+              />
+            )
+          )}
+        </SCProductList>
+      </SCContentWrapper>
+      <Footer />
+    </>
   );
 };

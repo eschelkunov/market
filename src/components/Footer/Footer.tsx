@@ -1,6 +1,10 @@
 import React from "react";
-import { SCFooter } from "./Footer.styles";
+import { SCFooter, SCFooterWrapper } from "./Footer.styles";
 
 export const Footer = () => {
-  return <SCFooter>{"© 2020 Copyright: Evgeniy Schelkunov"}</SCFooter>;
+  return (
+    <SCFooterWrapper>
+      <SCFooter>{"© 2020 Copyright: Evgeniy Schelkunov"}</SCFooter>
+    </SCFooterWrapper>
+  );
 };

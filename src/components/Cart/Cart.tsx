@@ -11,8 +11,11 @@ import {
   SCButton,
   SCSum,
   SCInvisibleCounter,
+  SCCartWrapper,
 } from "./Cart.style";
 import { ActionCreator } from "@reduxjs/toolkit";
+import { Header } from "../AppBar/Header";
+import { Footer } from "../Footer/Footer";
 
 interface ICartProps {
   productsInCart: IProduct[];
@@ -25,34 +28,44 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
 }) => {
   let total = 0;
   return (
-    <SCCart>
-      {productsInCart.length ? (
-        <>
-          <SCCartHeader>You are going to buy next products:</SCCartHeader>
-          {productsInCart.map(({ productName, productPrice, productId }, i) => (
-            <div key={productId}>
-              <SCWrapper>
-                <SCIndex>{i + 1}</SCIndex>
-                <SCProductName>{productName}</SCProductName>
-                <SCProductPrice>{productPrice + " UAH"}</SCProductPrice>
-                <HighlightOffIcon
-                  onClick={() => removeProductFromCart(productId)}
-                />
-              </SCWrapper>
-              <SCInvisibleCounter>{(total += productPrice)}</SCInvisibleCounter>
-            </div>
-          ))}
-          <SCSum>In Total: {total} UAH</SCSum>
-          <SCButton
-            onClick={() => alert("Thank you for purchase!")}
-            variant="contained"
-          >
-            Buy
-          </SCButton>
-        </>
-      ) : (
-        <SCCartHeader>Your cart is empty</SCCartHeader>
-      )}
-    </SCCart>
+    <>
+      <Header />
+      <SCCartWrapper>
+        <SCCart>
+          {productsInCart.length ? (
+            <>
+              <SCCartHeader>You are going to buy next products:</SCCartHeader>
+              {productsInCart.map(
+                ({ productName, productPrice, productId }, i) => (
+                  <div key={productId}>
+                    <SCWrapper>
+                      <SCIndex>{i + 1}</SCIndex>
+                      <SCProductName>{productName}</SCProductName>
+                      <SCProductPrice>{productPrice + " UAH"}</SCProductPrice>
+                      <HighlightOffIcon
+                        onClick={() => removeProductFromCart(productId)}
+                      />
+                    </SCWrapper>
+                    <SCInvisibleCounter>
+                      {(total += productPrice)}
+                    </SCInvisibleCounter>
+                  </div>
+                )
+              )}
+              <SCSum>In Total: {total} UAH</SCSum>
+              <SCButton
+                onClick={() => alert("Thank you for purchase!")}
+                variant="contained"
+              >
+                Buy
+              </SCButton>
+            </>
+          ) : (
+            <SCCartHeader>Your cart is empty</SCCartHeader>
+          )}
+        </SCCart>
+      </SCCartWrapper>
+      <Footer />
+    </>
   );
 };
