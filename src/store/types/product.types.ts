@@ -1,4 +1,8 @@
-import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART } from "../constants";
+import {
+  FETCH_PRODUCTS,
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART,
+} from "../constants";
 
 export interface IProduct {
   productId: number;
@@ -20,4 +24,12 @@ interface IAddProductToCart {
   payload: IProduct;
 }
 
-export type ProductActionTypes = IFetchProducts | IAddProductToCart;
+interface IRemoveProductFromCart {
+  type: typeof REMOVE_PRODUCT_FROM_CART;
+  productId: number;
+}
+
+export type ProductActionTypes =
+  | IFetchProducts
+  | IAddProductToCart
+  | IRemoveProductFromCart;

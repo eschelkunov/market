@@ -19,7 +19,7 @@ export const Product: React.FunctionComponent<IProductProps> = ({
     <SCProduct>
       <img alt={productName} src={imageURL} />
       <p>{productName}</p>
-      <p>{"Price " + productPrice + " ₴"}</p>
+      <p>{"Price: " + productPrice + " ₴"}</p>
       <Button onClick={onAdd} variant="contained">
         Add to Cart
       </Button>
