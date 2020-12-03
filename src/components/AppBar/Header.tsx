@@ -1,5 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { IStore } from "../../store/types/store.types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,10 +10,13 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { SimpleMenu } from "../SimpleMenu/SimpleMenu";
-import { CART } from "../AppRoutes";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "../AppRoutes";
+import { SCButtonWrapper, SCCounterIcon } from "./Header.style";
+import { IProduct } from "../../store/types/product.types";
 
-interface IHeaderProps {
-  title: string;
+interface IPageHeaderProps {
+  productsInCart: IProduct[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +31,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header: React.FunctionComponent<IHeaderProps> = ({ title }) => {
+const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
+  productsInCart,
+}) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+
+  const handleHeaderName = (locationPath: string) => {
+    switch (locationPath) {
+      case GOODS:
+        return "Goods";
+      case CONTACT_US:
+        return "Contact Information";
+      case ABOUT:
+        return "About Us";
+      case ADMIN:
+        return "Admin panel";
+      case CART:
+        return "My Cart";
+      default:
+        return "";
+    }
+  };
 
   const onMenuClick = (event: SyntheticEvent) => {
     setAnchorEl(event.currentTarget);
@@ -60,15 +85,31 @@ export const Header: React.FunctionComponent<IHeaderProps> = ({ title }) => {
           <SimpleMenu anchorEl={anchorEl} close={handleClose} />
 
           <Typography variant="h6" className={classes.title}>
-            {title}
+            {handleHeaderName(location.pathname)}
           </Typography>
-          {["Goods", "Contact Information", "About Us"].includes(title) && (
-            <Button color="inherit" onClick={onCartClick}>
-              My cart
-            </Button>
+          {["Goods", "Contact Information", "About Us"].includes(
+            handleHeaderName(location.pathname)
+          ) && (
+            <>
+              <SCButtonWrapper>
+                <Button color="inherit" onClick={onCartClick}>
+                  My Cart
+                  <ShoppingCartIcon style={{ marginLeft: "5px" }} />
+                  {productsInCart.length > 0 && (
+                    <SCCounterIcon>{productsInCart.length}</SCCounterIcon>
+                  )}
+                </Button>
+              </SCButtonWrapper>
+            </>
           )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
+
+const mapStateToProps = (state: IStore) => ({
+  productsInCart: state.productsInCart,
+});
+
+export const Header = connect(mapStateToProps)(PageHeader);
