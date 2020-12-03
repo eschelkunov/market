@@ -8,3 +8,13 @@ export const SCProduct = styled.div`
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.24);
   }
 `;
+
+export const SCFlexWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const SCIconWrapper = styled.div`
+  align-self: center;
+  color: #4caf50;
+`;

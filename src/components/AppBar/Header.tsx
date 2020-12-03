@@ -1,5 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { IStore } from "../../store/types/store.types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,7 +10,14 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { SimpleMenu } from "../SimpleMenu/SimpleMenu";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "../AppRoutes";
+import { SCButtonWrapper, SCCounterIcon } from "./Header.style";
+import { IProduct } from "../../store/types/product.types";
+
+interface IPageHeaderProps {
+  productsInCart: IProduct[];
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Header: React.FunctionComponent = () => {
+const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
+  productsInCart,
+}) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const classes = useStyles();
   const history = useHistory();
@@ -79,12 +90,26 @@ export const Header: React.FunctionComponent = () => {
           {["Goods", "Contact Information", "About Us"].includes(
             handleHeaderName(location.pathname)
           ) && (
-            <Button color="inherit" onClick={onCartClick}>
-              My cart
-            </Button>
+            <>
+              <SCButtonWrapper>
+                <Button color="inherit" onClick={onCartClick}>
+                  My Cart
+                  <ShoppingCartIcon style={{ marginLeft: "5px" }} />
+                  {productsInCart.length > 0 && (
+                    <SCCounterIcon>{productsInCart.length}</SCCounterIcon>
+                  )}
+                </Button>
+              </SCButtonWrapper>
+            </>
           )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
+
+const mapStateToProps = (state: IStore) => ({
+  productsInCart: state.productsInCart,
+});
+
+export const Header = connect(mapStateToProps)(PageHeader);
