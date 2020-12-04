@@ -1,21 +1,19 @@
 import React from "react";
 import { IProduct, ProductActionTypes } from "../../store/types/product.types";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import {
   SCCart,
   SCCartHeader,
-  SCProductName,
   SCWrapper,
-  SCIndex,
-  SCProductPrice,
   SCButton,
   SCSum,
   SCInvisibleCounter,
   SCCartWrapper,
+  SCFlexWrapper,
 } from "./Cart.style";
 import { ActionCreator } from "@reduxjs/toolkit";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
+import { CartItem } from "./CartItem";
 
 interface ICartProps {
   productsInCart: IProduct[];
@@ -27,6 +25,7 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
   removeProductFromCart,
 }) => {
   let total = 0;
+
   return (
     <>
       <Header />
@@ -39,11 +38,12 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
                 ({ productName, productPrice, productId }, i) => (
                   <div key={productId}>
                     <SCWrapper>
-                      <SCIndex>{i + 1}</SCIndex>
-                      <SCProductName>{productName}</SCProductName>
-                      <SCProductPrice>{productPrice + " UAH"}</SCProductPrice>
-                      <HighlightOffIcon
-                        onClick={() => removeProductFromCart(productId)}
+                      <CartItem
+                        index={i}
+                        productName={productName}
+                        productPrice={productPrice}
+                        productId={productId}
+                        removeProductFromCart={removeProductFromCart}
                       />
                     </SCWrapper>
                     <SCInvisibleCounter>
@@ -52,13 +52,16 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
                   </div>
                 )
               )}
-              <SCSum>In Total: {total} UAH</SCSum>
-              <SCButton
-                onClick={() => alert("Thank you for purchase!")}
-                variant="contained"
-              >
-                Buy
-              </SCButton>
+              <SCFlexWrapper>
+                <SCSum>In Total: {total} UAH</SCSum>
+                <SCButton
+                  onClick={() => alert("Thank you for purchase!")}
+                  variant="contained"
+                  color="primary"
+                >
+                  Buy
+                </SCButton>
+              </SCFlexWrapper>
             </>
           ) : (
             <SCCartHeader>Your cart is empty</SCCartHeader>
