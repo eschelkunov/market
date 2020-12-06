@@ -1,5 +1,5 @@
 import React from "react";
-import { IProduct, ProductActionTypes } from "../../store/types/product.types";
+import { IProduct } from "../../store/types/product.types";
 import {
   SCCart,
   SCCartHeader,
@@ -10,19 +10,22 @@ import {
   SCCartWrapper,
   SCFlexWrapper,
 } from "./Cart.style";
-import { ActionCreator } from "@reduxjs/toolkit";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
 import { CartItem } from "./CartItem";
 
 interface ICartProps {
   productsInCart: IProduct[];
-  removeProductFromCart: ActionCreator<ProductActionTypes>;
+  removeProductFromCart: (productId: number) => void;
+  increaseCount: (productId: number) => void;
+  decreaseCount: (productId: number) => void;
 }
 
 export const Cart: React.FunctionComponent<ICartProps> = ({
   productsInCart,
   removeProductFromCart,
+  increaseCount,
+  decreaseCount,
 }) => {
   let total = 0;
 
@@ -35,7 +38,7 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
             <>
               <SCCartHeader>You are going to buy next products:</SCCartHeader>
               {productsInCart.map(
-                ({ productName, productPrice, productId }, i) => (
+                ({ productName, productPrice, productId, productCount }, i) => (
                   <div key={productId}>
                     <SCWrapper>
                       <CartItem
@@ -44,6 +47,9 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
                         productPrice={productPrice}
                         productId={productId}
                         removeProductFromCart={removeProductFromCart}
+                        productCount={productCount}
+                        increaseCount={increaseCount}
+                        decreaseCount={decreaseCount}
                       />
                     </SCWrapper>
                     <SCInvisibleCounter>

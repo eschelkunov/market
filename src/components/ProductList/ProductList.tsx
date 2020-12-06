@@ -1,7 +1,6 @@
-import { ActionCreator } from "@reduxjs/toolkit";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { IProduct, ProductActionTypes } from "../../store/types/product.types";
+import { IProduct } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
 import { CART } from "../AppRoutes";
 import { Footer } from "../Footer/Footer";
@@ -11,13 +10,15 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 interface IProductListProps {
   products: IProduct[];
   productsInCart: IProduct[];
-  addProductToCart: ActionCreator<ProductActionTypes>;
+  addProductToCart: ({ ...props }: IProduct) => void;
+  increaseCount: (productId: number) => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
   productsInCart,
   addProductToCart,
+  increaseCount,
 }) => {
   const history = useHistory();
   const isItemAlreadyInCart = (id: number) =>
@@ -28,6 +29,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
     imageURL,
     productName,
     productPrice,
+    productCount,
   }: IProduct) => {
     if (isItemAlreadyInCart(productId)) {
       history.push(CART);
@@ -37,7 +39,9 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
         imageURL,
         productName,
         productPrice,
+        productCount,
       });
+      increaseCount(productId); //use async await when connecting server
     }
   };
 
@@ -47,7 +51,13 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
       <SCContentWrapper>
         <SCProductList>
           {products.map(
-            ({ productId, imageURL, productName, productPrice }) => (
+            ({
+              productId,
+              imageURL,
+              productName,
+              productPrice,
+              productCount,
+            }) => (
               <Product
                 key={productId}
                 imageURL={imageURL}
@@ -60,6 +70,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
                     imageURL,
                     productName,
                     productPrice,
+                    productCount,
                   })
                 }
               />

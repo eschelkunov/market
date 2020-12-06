@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -17,6 +17,9 @@ interface ICartItemProps {
   productId: number;
   productPrice: number;
   removeProductFromCart: (productId: number) => void;
+  productCount: number | undefined;
+  increaseCount: (productId: number) => void;
+  decreaseCount: (productId: number) => void;
 }
 
 export const CartItem: React.FunctionComponent<ICartItemProps> = ({
@@ -25,21 +28,23 @@ export const CartItem: React.FunctionComponent<ICartItemProps> = ({
   productPrice,
   productId,
   removeProductFromCart,
+  productCount,
+  increaseCount,
+  decreaseCount,
 }) => {
-  const [itemCount, setItemCount] = useState(1);
   return (
     <>
       <SCIndex>{index + 1}</SCIndex>
       <SCProductName>{productName}</SCProductName>
       <SCCartCounter>
         <SCCartCounterButton
-          disabled={itemCount === 1}
-          onClick={() => setItemCount(itemCount - 1)}
+          disabled={productCount === 1}
+          onClick={() => decreaseCount(productId)}
         >
           <RemoveIcon />
         </SCCartCounterButton>
-        <SCCounterInput type="text" value={itemCount} onChange={() => {}} />
-        <SCCartCounterButton onClick={() => setItemCount(itemCount + 1)}>
+        <SCCounterInput type="text" value={productCount} onChange={() => {}} />
+        <SCCartCounterButton onClick={() => increaseCount(productId)}>
           <AddIcon />
         </SCCartCounterButton>
       </SCCartCounter>

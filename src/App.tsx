@@ -5,8 +5,8 @@ import { Admin } from "./components/Admin/Admin";
 import { ContactInfo } from "./components/ContactInfo/ContactInfo";
 import { AboutUs } from "./components/AboutUs/AboutUs";
 import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "./components/AppRoutes";
-import { GoodsPage } from "./components/containers/GoodsPage";
-import { CartPage } from "./components/containers/CartPage";
+import { GoodsPage } from "./containers/GoodsPage";
+import { CartPage } from "./containers/CartPage";
 import "./index.css";
 
 const App: React.FunctionComponent<any> = () => {

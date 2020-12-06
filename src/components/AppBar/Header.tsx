@@ -14,6 +14,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "../AppRoutes";
 import { SCButtonWrapper, SCCounterIcon } from "./Header.style";
 import { IProduct } from "../../store/types/product.types";
+import { getProductsInCart } from "../../store/selectors/productSelectors";
 
 interface IPageHeaderProps {
   productsInCart: IProduct[];
@@ -109,7 +110,7 @@ const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
 };
 
 const mapStateToProps = (state: IStore) => ({
-  productsInCart: state.productsInCart,
+  productsInCart: getProductsInCart(state),
 });
 
 export const Header = connect(mapStateToProps)(PageHeader);

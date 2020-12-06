@@ -2,6 +2,8 @@ import {
   FETCH_PRODUCTS,
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
+  INCREASE_COUNT,
+  DECREASE_COUNT,
 } from "../constants";
 
 export interface IProduct {
@@ -9,6 +11,7 @@ export interface IProduct {
   productName: string;
   productPrice: number;
   imageURL: string;
+  productCount: number;
 }
 
 export interface IProductList {
@@ -29,7 +32,19 @@ interface IRemoveProductFromCart {
   productId: number;
 }
 
+interface IIncreaseCount {
+  type: typeof INCREASE_COUNT;
+  productId: number;
+}
+
+interface IDecreaseCount {
+  type: typeof DECREASE_COUNT;
+  productId: number;
+}
+
 export type ProductActionTypes =
   | IFetchProducts
   | IAddProductToCart
-  | IRemoveProductFromCart;
+  | IRemoveProductFromCart
+  | IIncreaseCount
+  | IDecreaseCount;
