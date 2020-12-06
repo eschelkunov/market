@@ -1,64 +1,77 @@
 import React from "react";
-import { IProduct, ProductActionTypes } from "../../store/types/product.types";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import { IProduct } from "../../store/types/product.types";
 import {
   SCCart,
   SCCartHeader,
-  SCProductName,
   SCWrapper,
-  SCIndex,
-  SCProductPrice,
   SCButton,
   SCSum,
   SCInvisibleCounter,
   SCCartWrapper,
+  SCFlexWrapper,
 } from "./Cart.style";
-import { ActionCreator } from "@reduxjs/toolkit";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
+import { CartItem } from "./CartItem";
 
 interface ICartProps {
-  productsInCart: IProduct[];
-  removeProductFromCart: ActionCreator<ProductActionTypes>;
+  cartProducts: IProduct[];
+  removeProductFromCart: (productId: number) => void;
+  increaseCount: (productId: number) => void;
+  decreaseCount: (productId: number) => void;
 }
 
 export const Cart: React.FunctionComponent<ICartProps> = ({
-  productsInCart,
+  cartProducts,
   removeProductFromCart,
+  increaseCount,
+  decreaseCount,
 }) => {
   let total = 0;
+
   return (
     <>
       <Header />
       <SCCartWrapper>
         <SCCart>
-          {productsInCart.length ? (
+          {cartProducts.length ? (
             <>
               <SCCartHeader>You are going to buy next products:</SCCartHeader>
-              {productsInCart.map(
-                ({ productName, productPrice, productId }, i) => (
+              {cartProducts.map(
+                (
+                  { productName, productPrice, productId, productsInCart, productsAvailable },
+                  i
+                ) => (
                   <div key={productId}>
                     <SCWrapper>
-                      <SCIndex>{i + 1}</SCIndex>
-                      <SCProductName>{productName}</SCProductName>
-                      <SCProductPrice>{productPrice + " UAH"}</SCProductPrice>
-                      <HighlightOffIcon
-                        onClick={() => removeProductFromCart(productId)}
+                      <CartItem
+                        index={i}
+                        productId={productId}
+                        productName={productName}
+                        productPrice={productPrice}
+                        productsInCart={productsInCart}
+                        productsAvailable={productsAvailable}
+                        increaseCount={increaseCount}
+                        decreaseCount={decreaseCount}
+                        removeProductFromCart={removeProductFromCart}
                       />
                     </SCWrapper>
                     <SCInvisibleCounter>
-                      {(total += productPrice)}
+                      {(total += productPrice * productsInCart)}
                     </SCInvisibleCounter>
                   </div>
                 )
               )}
-              <SCSum>In Total: {total} UAH</SCSum>
-              <SCButton
-                onClick={() => alert("Thank you for purchase!")}
-                variant="contained"
-              >
-                Buy
-              </SCButton>
+              <SCFlexWrapper>
+                <SCSum>In Total: {total} UAH</SCSum>
+                <SCButton
+                  onClick={() => alert("Thank you for purchase!")}
+                  variant="contained"
+                  color="primary"
+                >
+                  Buy
+                </SCButton>
+              </SCFlexWrapper>
             </>
           ) : (
             <SCCartHeader>Your cart is empty</SCCartHeader>

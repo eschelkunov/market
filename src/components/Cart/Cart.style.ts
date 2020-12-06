@@ -28,13 +28,15 @@ export const SCWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+  padding-top: 16px;
+  padding-bottom: 16px;
   & div {
     font-size: 1.17em;
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
     padding-bottom: 2px;
-    border-bottom: 1px dashed #3f51b5;
   }
 `;
 
@@ -50,4 +52,38 @@ export const SCButton = styled(Button)`
 export const SCSum = styled.h2``;
 export const SCInvisibleCounter = styled.div`
   display: none;
+`;
+
+export const SCCartCounter = styled.div`
+  display: flex;
+  align-items: center;
+  &&& {
+    border-bottom: none;
+  }
+`;
+
+export const SCCartCounterButton = styled.button`
+  border: none;
+  background: #fff;
+  &:disabled > * {
+    cursor: not-allowed;
+    color: #e9e9e9;
+  }
+`;
+
+export const SCCounterInput = styled.input`
+  width: 40px;
+  height: 30px;
+  margin-left: 4px;
+  margin-right: 4px;
+  text-align: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+`;
+
+export const SCFlexWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 `;

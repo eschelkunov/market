@@ -14,9 +14,10 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ABOUT, ADMIN, CART, CONTACT_US, GOODS } from "../AppRoutes";
 import { SCButtonWrapper, SCCounterIcon } from "./Header.style";
 import { IProduct } from "../../store/types/product.types";
+import { getProductsInCart } from "../../store/selectors/productSelectors";
 
 interface IPageHeaderProps {
-  productsInCart: IProduct[];
+  cartProducts: IProduct[];
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
-  productsInCart,
+  cartProducts,
 }) => {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const classes = useStyles();
@@ -95,8 +96,8 @@ const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
                 <Button color="inherit" onClick={onCartClick}>
                   My Cart
                   <ShoppingCartIcon style={{ marginLeft: "5px" }} />
-                  {productsInCart.length > 0 && (
-                    <SCCounterIcon>{productsInCart.length}</SCCounterIcon>
+                  {cartProducts.length > 0 && (
+                    <SCCounterIcon>{cartProducts.length}</SCCounterIcon>
                   )}
                 </Button>
               </SCButtonWrapper>
@@ -109,7 +110,7 @@ const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
 };
 
 const mapStateToProps = (state: IStore) => ({
-  productsInCart: state.productsInCart,
+  cartProducts: getProductsInCart(state),
 });
 
 export const Header = connect(mapStateToProps)(PageHeader);

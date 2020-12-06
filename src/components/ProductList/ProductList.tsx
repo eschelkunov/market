@@ -1,7 +1,6 @@
-import { ActionCreator } from "@reduxjs/toolkit";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { IProduct, ProductActionTypes } from "../../store/types/product.types";
+import { IProduct } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
 import { CART } from "../AppRoutes";
 import { Footer } from "../Footer/Footer";
@@ -10,34 +9,20 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  productsInCart: IProduct[];
-  addProductToCart: ActionCreator<ProductActionTypes>;
+  addProductToCart: (productId: number) => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
-  productsInCart,
   addProductToCart,
 }) => {
   const history = useHistory();
-  const isItemAlreadyInCart = (id: number) =>
-    productsInCart.some((product) => product.productId === id);
 
-  const onAddToCart = ({
-    productId,
-    imageURL,
-    productName,
-    productPrice,
-  }: IProduct) => {
-    if (isItemAlreadyInCart(productId)) {
+  const onAddToCart = (id: number, alreadyInCart: boolean) => {
+    if (alreadyInCart) {
       history.push(CART);
     } else {
-      addProductToCart({
-        productId,
-        imageURL,
-        productName,
-        productPrice,
-      });
+      addProductToCart(id);
     }
   };
 
@@ -47,21 +32,20 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
       <SCContentWrapper>
         <SCProductList>
           {products.map(
-            ({ productId, imageURL, productName, productPrice }) => (
+            ({
+              productId,
+              imageURL,
+              productName,
+              productPrice,
+              isProductInCart,
+            }) => (
               <Product
                 key={productId}
                 imageURL={imageURL}
                 productName={productName}
                 productPrice={productPrice}
-                isItemInCart={isItemAlreadyInCart(productId)}
-                onAdd={() =>
-                  onAddToCart({
-                    productId,
-                    imageURL,
-                    productName,
-                    productPrice,
-                  })
-                }
+                isItemInCart={isProductInCart}
+                onAdd={() => onAddToCart(productId, isProductInCart)}
               />
             )
           )}

@@ -1,7 +1,9 @@
 import { Reducer } from "redux";
 import {
-  FETCH_PRODUCTS,
+  // FETCH_PRODUCTS,
   ADD_PRODUCT_TO_CART,
+  DECREASE_COUNT,
+  INCREASE_COUNT,
   REMOVE_PRODUCT_FROM_CART,
 } from "../constants";
 import { ProductActionTypes } from "../types/product.types";
@@ -15,6 +17,9 @@ const initialState: IStore = {
       productPrice: 489,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 2,
@@ -22,6 +27,9 @@ const initialState: IStore = {
       productPrice: 340,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 3,
@@ -29,6 +37,9 @@ const initialState: IStore = {
       productPrice: 210,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 4,
@@ -36,6 +47,9 @@ const initialState: IStore = {
       productPrice: 230,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 5,
@@ -43,6 +57,9 @@ const initialState: IStore = {
       productPrice: 400,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 6,
@@ -50,6 +67,9 @@ const initialState: IStore = {
       productPrice: 505,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 7,
@@ -57,6 +77,9 @@ const initialState: IStore = {
       productPrice: 100,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 8,
@@ -64,6 +87,9 @@ const initialState: IStore = {
       productPrice: 100,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
     {
       productId: 9,
@@ -71,9 +97,11 @@ const initialState: IStore = {
       productPrice: 100,
       imageURL:
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      isProductInCart: false,
+      productsInCart: 0,
+      productsAvailable: 0,
     },
   ],
-  productsInCart: [],
 };
 
 export const productReducer: Reducer<IStore, ProductActionTypes> = (
@@ -81,22 +109,52 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
   action
 ): IStore => {
   switch (action.type) {
-    case FETCH_PRODUCTS:
-      return {
-        ...state,
-        products: action.payload,
-      };
+    // case FETCH_PRODUCTS:
+    //   return {
+    //     ...state,
+    //     products: action.payload,
+    //   };
     case ADD_PRODUCT_TO_CART:
+      const indexToAdd = state.products.findIndex(
+        (product) => product.productId === action.productId
+      );
+      const productsCopyAdd = [...state.products];
+      productsCopyAdd[indexToAdd].isProductInCart = true;
+      productsCopyAdd[indexToAdd].productsInCart += 1;
       return {
         ...state,
-        productsInCart: [...state.productsInCart, action.payload],
+        products: productsCopyAdd,
       };
     case REMOVE_PRODUCT_FROM_CART:
+      const indexToRemove = state.products.findIndex(
+        (product) => product.productId === action.productId
+      );
+      const productsCopyRm = [...state.products];
+      productsCopyRm[indexToRemove].isProductInCart = false;
+      productsCopyRm[indexToRemove].productsInCart = 0;
       return {
         ...state,
-        productsInCart: state.productsInCart.filter(
-          (product) => product.productId !== action.productId
-        ),
+        products: productsCopyRm,
+      };
+    case INCREASE_COUNT:
+      const indexIncr = state.products.findIndex(
+        (product) => product.productId === action.productId
+      );
+      const productsInCartIncr = [...state.products];
+      productsInCartIncr[indexIncr].productsInCart += 1;
+      return {
+        ...state,
+        products: productsInCartIncr,
+      };
+    case DECREASE_COUNT:
+      const indexDecr = state.products.findIndex(
+        (product) => product.productId === action.productId
+      );
+      const productsInCartDecr = [...state.products];
+      productsInCartDecr[indexDecr].productsInCart -= 1;
+      return {
+        ...state,
+        products: productsInCartDecr,
       };
     default:
       return state;
