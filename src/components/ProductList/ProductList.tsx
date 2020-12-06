@@ -9,39 +9,20 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  productsInCart: IProduct[];
-  addProductToCart: ({ ...props }: IProduct) => void;
-  increaseCount: (productId: number) => void;
+  addProductToCart: (productId: number) => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
-  productsInCart,
   addProductToCart,
-  increaseCount,
 }) => {
   const history = useHistory();
-  const isItemAlreadyInCart = (id: number) =>
-    productsInCart.some((product) => product.productId === id);
 
-  const onAddToCart = ({
-    productId,
-    imageURL,
-    productName,
-    productPrice,
-    productCount,
-  }: IProduct) => {
-    if (isItemAlreadyInCart(productId)) {
+  const onAddToCart = (id: number, alreadyInCart: boolean) => {
+    if (alreadyInCart) {
       history.push(CART);
     } else {
-      addProductToCart({
-        productId,
-        imageURL,
-        productName,
-        productPrice,
-        productCount,
-      });
-      increaseCount(productId); //use async await when connecting server
+      addProductToCart(id);
     }
   };
 
@@ -56,23 +37,15 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
               imageURL,
               productName,
               productPrice,
-              productCount,
+              isProductInCart,
             }) => (
               <Product
                 key={productId}
                 imageURL={imageURL}
                 productName={productName}
                 productPrice={productPrice}
-                isItemInCart={isItemAlreadyInCart(productId)}
-                onAdd={() =>
-                  onAddToCart({
-                    productId,
-                    imageURL,
-                    productName,
-                    productPrice,
-                    productCount,
-                  })
-                }
+                isItemInCart={isProductInCart}
+                onAdd={() => onAddToCart(productId, isProductInCart)}
               />
             )
           )}

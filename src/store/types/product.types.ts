@@ -1,5 +1,5 @@
 import {
-  FETCH_PRODUCTS,
+  // FETCH_PRODUCTS,
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   INCREASE_COUNT,
@@ -11,20 +11,19 @@ export interface IProduct {
   productName: string;
   productPrice: number;
   imageURL: string;
-  productCount: number;
+  isProductInCart: boolean;
+  productsInCart: number;
+  productsAvailable: number;
 }
 
-export interface IProductList {
-  products: IProduct[];
-}
-export interface IFetchProducts {
-  type: typeof FETCH_PRODUCTS;
-  payload: IProduct[];
-}
+// export interface IFetchProducts {
+//   type: typeof FETCH_PRODUCTS;
+//   payload: IProduct[];
+// }
 
 interface IAddProductToCart {
   type: typeof ADD_PRODUCT_TO_CART;
-  payload: IProduct;
+  productId: number;
 }
 
 interface IRemoveProductFromCart {
@@ -43,8 +42,5 @@ interface IDecreaseCount {
 }
 
 export type ProductActionTypes =
-  | IFetchProducts
-  | IAddProductToCart
-  | IRemoveProductFromCart
-  | IIncreaseCount
-  | IDecreaseCount;
+  // | IFetchProducts
+  IAddProductToCart | IRemoveProductFromCart | IIncreaseCount | IDecreaseCount;

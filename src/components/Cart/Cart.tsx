@@ -15,14 +15,14 @@ import { Footer } from "../Footer/Footer";
 import { CartItem } from "./CartItem";
 
 interface ICartProps {
-  productsInCart: IProduct[];
+  cartProducts: IProduct[];
   removeProductFromCart: (productId: number) => void;
   increaseCount: (productId: number) => void;
   decreaseCount: (productId: number) => void;
 }
 
 export const Cart: React.FunctionComponent<ICartProps> = ({
-  productsInCart,
+  cartProducts,
   removeProductFromCart,
   increaseCount,
   decreaseCount,
@@ -34,26 +34,30 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
       <Header />
       <SCCartWrapper>
         <SCCart>
-          {productsInCart.length ? (
+          {cartProducts.length ? (
             <>
               <SCCartHeader>You are going to buy next products:</SCCartHeader>
-              {productsInCart.map(
-                ({ productName, productPrice, productId, productCount }, i) => (
+              {cartProducts.map(
+                (
+                  { productName, productPrice, productId, productsInCart, productsAvailable },
+                  i
+                ) => (
                   <div key={productId}>
                     <SCWrapper>
                       <CartItem
                         index={i}
+                        productId={productId}
                         productName={productName}
                         productPrice={productPrice}
-                        productId={productId}
-                        removeProductFromCart={removeProductFromCart}
-                        productCount={productCount}
+                        productsInCart={productsInCart}
+                        productsAvailable={productsAvailable}
                         increaseCount={increaseCount}
                         decreaseCount={decreaseCount}
+                        removeProductFromCart={removeProductFromCart}
                       />
                     </SCWrapper>
                     <SCInvisibleCounter>
-                      {(total += productPrice)}
+                      {(total += productPrice * productsInCart)}
                     </SCInvisibleCounter>
                   </div>
                 )

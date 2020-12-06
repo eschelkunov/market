@@ -9,7 +9,7 @@ import { Cart } from "../components/Cart/Cart";
 import { getProductsInCart } from "../store/selectors/productSelectors";
 
 const mapStateToProps = (state: IStore) => ({
-  productsInCart: getProductsInCart(state),
+  cartProducts: getProductsInCart(state),
 });
 
 const mapDispatchToProps = {

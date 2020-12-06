@@ -13,24 +13,26 @@ import {
 
 interface ICartItemProps {
   index: number;
-  productName: string;
   productId: number;
+  productName: string;
   productPrice: number;
-  removeProductFromCart: (productId: number) => void;
-  productCount: number | undefined;
+  productsInCart: number;
+  productsAvailable: number;
   increaseCount: (productId: number) => void;
   decreaseCount: (productId: number) => void;
+  removeProductFromCart: (productId: number) => void;
 }
 
 export const CartItem: React.FunctionComponent<ICartItemProps> = ({
   index,
+  productId,
   productName,
   productPrice,
-  productId,
-  removeProductFromCart,
-  productCount,
+  productsInCart,
+  productsAvailable,
   increaseCount,
   decreaseCount,
+  removeProductFromCart,
 }) => {
   return (
     <>
@@ -38,12 +40,16 @@ export const CartItem: React.FunctionComponent<ICartItemProps> = ({
       <SCProductName>{productName}</SCProductName>
       <SCCartCounter>
         <SCCartCounterButton
-          disabled={productCount === 1}
+          disabled={productsInCart === 1}
           onClick={() => decreaseCount(productId)}
         >
           <RemoveIcon />
         </SCCartCounterButton>
-        <SCCounterInput type="text" value={productCount} onChange={() => {}} />
+        <SCCounterInput
+          type="text"
+          value={productsInCart}
+          onChange={() => {}}
+        />
         <SCCartCounterButton onClick={() => increaseCount(productId)}>
           <AddIcon />
         </SCCartCounterButton>
