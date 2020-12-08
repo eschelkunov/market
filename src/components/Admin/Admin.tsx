@@ -1,14 +1,21 @@
 import React from "react";
+import { IProduct } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
-import { SCAdminWrapper } from "./Admin.style";
+import { AddProductForm } from "./AddProductForm";
+import { SCAdminWrapper, SCFormHeader } from "./Admin.style";
 
-export const Admin = () => {
+interface IAdminProps {
+  addProduct: (product: IProduct) => void;
+}
+
+export const Admin: React.FunctionComponent<IAdminProps> = ({ addProduct }) => {
   return (
     <>
       <Header />
-      <SCAdminWrapper className="content">
-        <div>Admin</div>
+      <SCAdminWrapper>
+        <SCFormHeader>Add your product below:</SCFormHeader>
+        <AddProductForm addProduct={addProduct} />
       </SCAdminWrapper>
       <Footer />
     </>

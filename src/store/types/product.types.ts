@@ -1,10 +1,19 @@
 import {
-  // FETCH_PRODUCTS,
+  ADD_PRODUCT,
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   INCREASE_COUNT,
   DECREASE_COUNT,
+  BUY_PRODUCTS,
 } from "../constants";
+
+export interface IFormProduct {
+  productId: number;
+  productName: string;
+  productPrice: number;
+  imageURL: string;
+  productsAvailable: number;
+}
 
 export interface IProduct {
   productId: number;
@@ -14,12 +23,13 @@ export interface IProduct {
   isProductInCart: boolean;
   productsInCart: number;
   productsAvailable: number;
+  productsLack?: number;
 }
 
-// export interface IFetchProducts {
-//   type: typeof FETCH_PRODUCTS;
-//   payload: IProduct[];
-// }
+export interface IAddProduct {
+  type: typeof ADD_PRODUCT;
+  payload: IProduct;
+}
 
 interface IAddProductToCart {
   type: typeof ADD_PRODUCT_TO_CART;
@@ -41,6 +51,15 @@ interface IDecreaseCount {
   productId: number;
 }
 
+interface IBuyProducts {
+  type: typeof BUY_PRODUCTS;
+  cartProductsIDs: number[];
+}
+
 export type ProductActionTypes =
-  // | IFetchProducts
-  IAddProductToCart | IRemoveProductFromCart | IIncreaseCount | IDecreaseCount;
+  | IAddProduct
+  | IAddProductToCart
+  | IRemoveProductFromCart
+  | IIncreaseCount
+  | IDecreaseCount
+  | IBuyProducts;

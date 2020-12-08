@@ -1,16 +1,17 @@
 import {
-  // FETCH_PRODUCTS,
+  ADD_PRODUCT,
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   INCREASE_COUNT,
   DECREASE_COUNT,
+  BUY_PRODUCTS,
 } from "../constants";
-import { ProductActionTypes } from "../types/product.types";
+import { IProduct, ProductActionTypes } from "../types/product.types";
 
-// export const fetchProducts = (products: IProduct[]): ProductActionTypes => ({
-//   type: FETCH_PRODUCTS,
-//   payload: products,
-// });
+export const addProduct = (product: IProduct): ProductActionTypes => ({
+  type: ADD_PRODUCT,
+  payload: product,
+});
 
 export const addProductToCart = (productId: number): ProductActionTypes => ({
   type: ADD_PRODUCT_TO_CART,
@@ -31,4 +32,8 @@ export const increaseCount = (productId: number): ProductActionTypes => ({
 export const decreaseCount = (productId: number): ProductActionTypes => ({
   type: DECREASE_COUNT,
   productId,
+});
+export const buyProducts = (cartProductsIDs: number[]): ProductActionTypes => ({
+  type: BUY_PRODUCTS,
+  cartProductsIDs,
 });

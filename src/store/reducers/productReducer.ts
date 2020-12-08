@@ -1,7 +1,8 @@
 import { Reducer } from "redux";
 import {
-  // FETCH_PRODUCTS,
+  ADD_PRODUCT,
   ADD_PRODUCT_TO_CART,
+  BUY_PRODUCTS,
   DECREASE_COUNT,
   INCREASE_COUNT,
   REMOVE_PRODUCT_FROM_CART,
@@ -19,7 +20,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 10,
     },
     {
       productId: 2,
@@ -29,7 +30,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 5,
     },
     {
       productId: 3,
@@ -39,7 +40,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 20,
     },
     {
       productId: 4,
@@ -49,7 +50,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 3,
     },
     {
       productId: 5,
@@ -59,7 +60,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 1,
     },
     {
       productId: 6,
@@ -79,7 +80,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 4,
     },
     {
       productId: 8,
@@ -89,7 +90,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 2,
     },
     {
       productId: 9,
@@ -99,7 +100,7 @@ const initialState: IStore = {
         "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       isProductInCart: false,
       productsInCart: 0,
-      productsAvailable: 0,
+      productsAvailable: 11,
     },
   ],
 };
@@ -109,11 +110,11 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
   action
 ): IStore => {
   switch (action.type) {
-    // case FETCH_PRODUCTS:
-    //   return {
-    //     ...state,
-    //     products: action.payload,
-    //   };
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
     case ADD_PRODUCT_TO_CART:
       const indexToAdd = state.products.findIndex(
         (product) => product.productId === action.productId
@@ -155,6 +156,37 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
       return {
         ...state,
         products: productsInCartDecr,
+      };
+    case BUY_PRODUCTS:
+      const indexes: number[] = [];
+      const productsCopy = [...state.products];
+      //getting product indexes in a whole products by id that user bought:
+      action.cartProductsIDs.forEach((id) => {
+        indexes.push(
+          state.products.findIndex((product) => product.productId === id)
+        );
+      });
+      /* for every index we're increasing/decreasing counters 
+      and if user is buying more then available - we set productsLack flag for admin(operator)*/
+      indexes.forEach((index: number) => {
+        if (
+          productsCopy[index].productsAvailable >=
+          productsCopy[index].productsInCart
+        ) {
+          productsCopy[index].productsAvailable -=
+            productsCopy[index].productsInCart;
+        } else {
+          productsCopy[index].productsLack =
+            productsCopy[index].productsAvailable -
+            productsCopy[index].productsInCart;
+          productsCopy[index].productsAvailable = 0;
+        }
+        productsCopy[index].productsInCart = 0;
+        productsCopy[index].isProductInCart = false;
+      });
+      return {
+        ...state,
+        products: productsCopy,
       };
     default:
       return state;

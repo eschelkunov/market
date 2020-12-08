@@ -64,7 +64,6 @@ export const SCCartCounter = styled.div`
 
 export const SCCartCounterButton = styled.button`
   border: none;
-  background: #fff;
   &:disabled > * {
     cursor: not-allowed;
     color: #e9e9e9;

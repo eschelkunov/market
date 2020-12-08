@@ -8,3 +8,10 @@ export const getProducts = (state: IStore) => {
 export const getProductsInCart = createSelector(getProducts, (products) => {
   return products.filter((product) => product.isProductInCart);
 });
+
+export const getProductsInCartIDs = createSelector(
+  getProductsInCart,
+  (products) => {
+    return products.map((product) => product.productId);
+  }
+);
