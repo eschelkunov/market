@@ -38,6 +38,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
               productName,
               productPrice,
               isProductInCart,
+              productsAvailable,
             }) => (
               <Product
                 key={productId}
@@ -45,6 +46,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
                 productName={productName}
                 productPrice={productPrice}
                 isItemInCart={isProductInCart}
+                productsAvailable={productsAvailable}
                 onAdd={() => onAddToCart(productId, isProductInCart)}
               />
             )

@@ -4,18 +4,21 @@ import {
   removeProductFromCart,
   increaseCount,
   decreaseCount,
+  buyProducts,
 } from "../store/actions/productActions";
 import { Cart } from "../components/Cart/Cart";
-import { getProductsInCart } from "../store/selectors/productSelectors";
+import { getProductsInCart, getProductsInCartIDs } from "../store/selectors/productSelectors";
 
 const mapStateToProps = (state: IStore) => ({
   cartProducts: getProductsInCart(state),
+  cartProductsIDs: getProductsInCartIDs(state),
 });
 
 const mapDispatchToProps = {
   removeProductFromCart,
   increaseCount,
   decreaseCount,
+  buyProducts,
 };
 
 export const CartPage = connect(mapStateToProps, mapDispatchToProps)(Cart);

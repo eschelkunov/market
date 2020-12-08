@@ -14,7 +14,12 @@ export const SCFlexWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const SCIconWrapper = styled.div`
+export const SCIconInCart = styled.div`
   align-self: center;
   color: #4caf50;
+`;
+
+export const SCIconNotAvailable = styled.div`
+  align-self: center;
+  color: #f44336;
 `;

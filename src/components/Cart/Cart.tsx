@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { IProduct } from "../../store/types/product.types";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import {
   SCCart,
   SCCartHeader,
@@ -13,21 +15,40 @@ import {
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
 import { CartItem } from "./CartItem";
+import { GOODS } from "../AppRoutes";
+import { MUIAlert } from "../Alert/Alert";
 
 interface ICartProps {
   cartProducts: IProduct[];
   removeProductFromCart: (productId: number) => void;
   increaseCount: (productId: number) => void;
   decreaseCount: (productId: number) => void;
+  buyProducts: (products: number[]) => void;
+  cartProductsIDs: number[];
 }
 
 export const Cart: React.FunctionComponent<ICartProps> = ({
   cartProducts,
+  cartProductsIDs,
   removeProductFromCart,
   increaseCount,
   decreaseCount,
+  buyProducts,
 }) => {
+  const [showAlert, setShowAlert] = useState(false);
+  const alertMessage =
+    "Thank you for purchase! Our managers will contact you as soon as possible!";
+  const history = useHistory();
   let total = 0;
+
+  const handleAlertClose = () => {
+    setShowAlert(false);
+  };
+
+  const onBuy = () => {
+    buyProducts(cartProductsIDs);
+    setShowAlert(true);
+  };
 
   return (
     <>
@@ -39,7 +60,13 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
               <SCCartHeader>You are going to buy next products:</SCCartHeader>
               {cartProducts.map(
                 (
-                  { productName, productPrice, productId, productsInCart, productsAvailable },
+                  {
+                    productName,
+                    productPrice,
+                    productId,
+                    productsInCart,
+                    productsAvailable,
+                  },
                   i
                 ) => (
                   <div key={productId}>
@@ -64,17 +91,33 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
               )}
               <SCFlexWrapper>
                 <SCSum>In Total: {total} UAH</SCSum>
-                <SCButton
-                  onClick={() => alert("Thank you for purchase!")}
-                  variant="contained"
-                  color="primary"
-                >
+                <SCButton onClick={onBuy} variant="contained" color="primary">
                   Buy
                 </SCButton>
               </SCFlexWrapper>
             </>
           ) : (
-            <SCCartHeader>Your cart is empty</SCCartHeader>
+            <>
+              <SCCartHeader>Your cart is empty</SCCartHeader>
+              <MUIAlert
+                showAlert={showAlert}
+                handleAlertClose={handleAlertClose}
+                message={alertMessage}
+                severity={"success"}
+              />
+              <SCButton
+                type="button"
+                variant="contained"
+                color="primary"
+                onClick={() => history.push(GOODS)}
+              >
+                <ArrowBackIosIcon
+                  fontSize="inherit"
+                  style={{ color: "white" }}
+                />
+                Back
+              </SCButton>
+            </>
           )}
         </SCCart>
       </SCCartWrapper>
