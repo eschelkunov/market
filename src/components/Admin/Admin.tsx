@@ -1,12 +1,12 @@
 import React from "react";
-import { IProduct } from "../../store/types/product.types";
+import { IProductFormData } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
 import { Footer } from "../Footer/Footer";
 import { AddProductForm } from "./AddProductForm";
 import { SCAdminWrapper, SCFormHeader } from "./Admin.style";
 
 interface IAdminProps {
-  addProduct: (product: IProduct) => void;
+  addProduct: (product: IProductFormData) => void;
 }
 
 export const Admin: React.FunctionComponent<IAdminProps> = ({ addProduct }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { ADMIN, GOODS } from "../AppRoutes";
+import { GOODS } from "../AppRoutes";
 import { useHistory } from "react-router-dom";
 import {
   SCInputLabel,
@@ -12,11 +12,11 @@ import {
   SCSpan,
   SCFlexWrapper,
 } from "./Admin.style";
-import { IFormProduct, IProduct } from "../../store/types/product.types";
+import { IFormData, IProductFormData } from "../../store/types/product.types";
 import { MUIAlert } from "../Alert/Alert";
 
 interface IAddProductForm {
-  addProduct: (product: IProduct) => void;
+  addProduct: (product: IProductFormData) => void;
 }
 
 export const AddProductForm: React.FunctionComponent<IAddProductForm> = ({
@@ -50,9 +50,8 @@ export const AddProductForm: React.FunctionComponent<IAddProductForm> = ({
       undefined
     );
 
-  const onSubmit = (obj: IFormProduct) => {
-    const product: IProduct = {
-      productId: Number(obj.productId),
+  const onSubmit = (obj: IFormData) => {
+    const product: IProductFormData = {
       productName: obj.productName,
       productPrice: Number(obj.productPrice),
       imageURL: obj.imageURL,
@@ -64,7 +63,7 @@ export const AddProductForm: React.FunctionComponent<IAddProductForm> = ({
     setShowAlert(true);
     //TODO: delete me when use async (form reset is not working with sync form)
     setTimeout(() => {
-      history.push(ADMIN);
+      history.push(GOODS);
     }, 4000);
   };
   return (
@@ -74,23 +73,6 @@ export const AddProductForm: React.FunctionComponent<IAddProductForm> = ({
         render={({ handleSubmit, valid }) => (
           <form onSubmit={handleSubmit}>
             <SCWrapper>
-              <SCFlexWrapper>
-                <SCInputLabel>Product ID</SCInputLabel>
-                <Field
-                  name="productId"
-                  component="input"
-                  validate={composeValidators(required, mustBeNumber)}
-                >
-                  {({ input, meta }: any) => (
-                    <>
-                      <SCInput type="text" {...input} component="input" />
-                      {meta.error && meta.touched && (
-                        <SCSpan>{meta.error}</SCSpan>
-                      )}
-                    </>
-                  )}
-                </Field>
-              </SCFlexWrapper>
               <SCFlexWrapper>
                 <SCInputLabel>Product Name</SCInputLabel>
                 <Field name="productName" component="input" validate={required}>

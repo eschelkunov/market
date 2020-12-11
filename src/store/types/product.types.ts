@@ -5,18 +5,24 @@ import {
   INCREASE_COUNT,
   DECREASE_COUNT,
   BUY_PRODUCTS,
+  SET_PRODUCTS,
 } from "../constants";
 
-export interface IFormProduct {
-  productId: number;
+export interface IFormData {
   productName: string;
   productPrice: number;
   imageURL: string;
   productsAvailable: number;
 }
 
+export interface IProductFormData extends IFormData {
+  isProductInCart: boolean;
+  productsInCart: number;
+  productsAvailable: number;
+}
+
 export interface IProduct {
-  productId: number;
+  id: number;
   productName: string;
   productPrice: number;
   imageURL: string;
@@ -26,6 +32,11 @@ export interface IProduct {
   productsLack?: number;
 }
 
+export interface ISetProducts {
+  type: typeof SET_PRODUCTS;
+  payload: IProduct[];
+}
+
 export interface IAddProduct {
   type: typeof ADD_PRODUCT;
   payload: IProduct;
@@ -33,22 +44,22 @@ export interface IAddProduct {
 
 interface IAddProductToCart {
   type: typeof ADD_PRODUCT_TO_CART;
-  productId: number;
+  id: number;
 }
 
 interface IRemoveProductFromCart {
   type: typeof REMOVE_PRODUCT_FROM_CART;
-  productId: number;
+  id: number;
 }
 
 interface IIncreaseCount {
   type: typeof INCREASE_COUNT;
-  productId: number;
+  id: number;
 }
 
 interface IDecreaseCount {
   type: typeof DECREASE_COUNT;
-  productId: number;
+  id: number;
 }
 
 interface IBuyProducts {
@@ -57,6 +68,7 @@ interface IBuyProducts {
 }
 
 export type ProductActionTypes =
+  | ISetProducts
   | IAddProduct
   | IAddProductToCart
   | IRemoveProductFromCart

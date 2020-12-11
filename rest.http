@@ -1,0 +1,39 @@
+// Works only in VScode using Rest Client
+
+// Test: Get all products in stock
+GET http://localhost:3000/products/
+
+#################
+
+// Test: Add product to stock
+POST http://localhost:3000/products/
+content-type: application/json
+
+{
+    "productName":"Coffe",
+    "productPrice":40,
+    "imageURL":"https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+    "isProductInCart":false,
+    "productsInCart":0,
+    "productsAvailable":10
+}
+
+####################
+
+// Test: Edit product
+PUT http://localhost:3000/products/4
+Content-Type: application/json
+
+{
+    "title": "UPDATED!!!!!!!",
+    "completed": false
+}
+
+#######
+
+// Test: Delete product from stock
+DELETE http://localhost:3000/products/5
+Content-Type: application/json
+
+
+

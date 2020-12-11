@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { IProduct } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
@@ -9,14 +9,20 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  addProductToCart: (productId: number) => void;
+  addProductToCart: (id: number) => void;
+  fetchProducts: () => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
   addProductToCart,
+  fetchProducts,
 }) => {
   const history = useHistory();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const onAddToCart = (id: number, alreadyInCart: boolean) => {
     if (alreadyInCart) {
@@ -33,7 +39,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
         <SCProductList>
           {products.map(
             ({
-              productId,
+              id,
               imageURL,
               productName,
               productPrice,
@@ -41,13 +47,13 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
               productsAvailable,
             }) => (
               <Product
-                key={productId}
+                key={id}
                 imageURL={imageURL}
                 productName={productName}
                 productPrice={productPrice}
                 isItemInCart={isProductInCart}
                 productsAvailable={productsAvailable}
-                onAdd={() => onAddToCart(productId, isProductInCart)}
+                onAdd={() => onAddToCart(id, isProductInCart)}
               />
             )
           )}

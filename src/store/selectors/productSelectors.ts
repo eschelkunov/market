@@ -12,6 +12,6 @@ export const getProductsInCart = createSelector(getProducts, (products) => {
 export const getProductsInCartIDs = createSelector(
   getProductsInCart,
   (products) => {
-    return products.map((product) => product.productId);
+    return products.map((product) => product.id);
   }
 );
