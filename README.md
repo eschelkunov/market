@@ -3,15 +3,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
-
-In the project directory, you can run:
+Note: To run synchronous version of the app (without Thunk middleware) please checkout to admin_form branch and run 'yarn start'\
+Otherwise, in the project directory, you can run:
 
 ### `yarn server`
-Runs the backend based on Rest plugin of VSCode on port :3000 (only in async brunch!). Make sure you have it installed and run this command first!
+Runs the backend based on Rest plugin of VSCode on port :3000 . Make sure you have it installed and run this command first!
 
 ### `yarn start`
 
-Runs the app in the development mode. Confirm running the app on :3001 port if you are in async branch!\
+Runs the app in the development mode. Confirm running the app on :3001 port\
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 The page will reload if you make edits.\
