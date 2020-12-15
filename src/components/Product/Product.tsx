@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button/Button";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import BlockIcon from "@material-ui/icons/Block";
 import React from "react";
-import { SCProduct, SCFlexWrapper, SCIconInCart, SCIconNotAvailable } from "./Product.style";
+import { SCProduct, SCFlexWrapper, SCIconInCart, SCIconNotAvailable, SCImg } from "./Product.style";
 
 interface IProductProps {
   imageURL: string;
@@ -23,7 +23,7 @@ export const Product: React.FunctionComponent<IProductProps> = ({
 }) => {
   return (
     <SCProduct>
-      <img alt={productName} src={imageURL} />
+      <SCImg alt={productName} src={imageURL} />
       <p>{productName}</p>
       <p>{"Price: " + productPrice + " UAH"}</p>
       <SCFlexWrapper>

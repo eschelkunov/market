@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Input } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
+import TableCell from "@material-ui/core/TableCell";
 import Button from "@material-ui/core/Button/Button";
 
 export const SCAdminWrapper = styled.div`
@@ -9,7 +10,9 @@ export const SCAdminWrapper = styled.div`
   font-size: 1.5 rem;
   color: gray;
   margin: 0 15px;
-  padding: 0 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2.5rem;
 `;
 
 export const SCFormHeader = styled.h2`
@@ -45,4 +48,13 @@ export const SCSpan = styled.span`
 
 export const SCButton = styled(Button)`
   margin: 15px 0;
+`;
+
+export const SCTableCell = styled(TableCell)`
+  padding: 16px;
+  max-width: 100px;
+  overflow: auto;
+  white-space: nowrap;
+  color: gray;
+  font-weight: 400;
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { IProduct } from "../../store/types/product.types";
 import { Header } from "../AppBar/Header";
@@ -9,26 +9,20 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  addProductToCart: (id: number) => void;
-  fetchProducts: () => void;
+  increaseProductCount: (id: number) => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
-  addProductToCart,
-  fetchProducts,
+  increaseProductCount,
 }) => {
   const history = useHistory();
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
 
   const onAddToCart = (id: number, alreadyInCart: boolean) => {
     if (alreadyInCart) {
       history.push(CART);
     } else {
-      addProductToCart(id);
+      increaseProductCount(id);
     }
   };
 
@@ -45,6 +39,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
               productPrice,
               isProductInCart,
               productsAvailable,
+              productsInCart,
             }) => (
               <Product
                 key={id}

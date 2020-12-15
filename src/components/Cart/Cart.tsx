@@ -21,8 +21,8 @@ import { MUIAlert } from "../Alert/Alert";
 interface ICartProps {
   cartProducts: IProduct[];
   removeProductFromCart: (id: number) => void;
-  increaseCount: (id: number) => void;
-  decreaseCount: (id: number) => void;
+  increaseProductCount: (id: number) => void;
+  decreaseProductCount: (id: number) => void;
   buyProducts: (products: number[]) => void;
   cartProductsIDs: number[];
 }
@@ -31,8 +31,8 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
   cartProducts,
   cartProductsIDs,
   removeProductFromCart,
-  increaseCount,
-  decreaseCount,
+  increaseProductCount,
+  decreaseProductCount,
   buyProducts,
 }) => {
   const [showAlert, setShowAlert] = useState(false);
@@ -78,8 +78,8 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
                         productPrice={productPrice}
                         productsInCart={productsInCart}
                         productsAvailable={productsAvailable}
-                        increaseCount={increaseCount}
-                        decreaseCount={decreaseCount}
+                        increaseProductCount={increaseProductCount}
+                        decreaseProductCount={decreaseProductCount}
                         removeProductFromCart={removeProductFromCart}
                       />
                     </SCWrapper>

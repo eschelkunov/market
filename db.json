@@ -2,29 +2,32 @@
   "products": [
     {
       "productName": "Coffe",
-      "productPrice": 40,
-      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "productPrice": 45,
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 2,
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 10,
+      "productsLack": 0,
       "id": 1
     },
     {
       "productName": "Coffe with Milk",
       "productPrice": 45,
-      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 0,
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 5,
+      "productsLack": 0,
       "id": 2
     },
     {
       "productName": "Capuccino",
       "productPrice": 50,
-      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 3,
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 20,
+      "productsLack": 0,
       "id": 3
     },
     {
@@ -33,25 +36,28 @@
       "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 3,
+      "productsAvailable": 5,
+      "productsLack": 0,
       "id": 4
     },
     {
       "productName": "Latte",
       "productPrice": 40,
-      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 5,
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 1,
+      "productsLack": 0,
       "id": 5
     },
     {
       "productName": "Americano",
       "productPrice": 50,
       "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "productsAvailable": 4,
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 0,
+      "productsLack": 0,
       "id": 6
     },
     {
@@ -60,7 +66,7 @@
       "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 4,
+      "productsAvailable": 3,
       "id": 7
     },
     {
@@ -69,7 +75,7 @@
       "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 2,
+      "productsAvailable": 6,
       "id": 8
     },
     {
@@ -78,7 +84,7 @@
       "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
       "isProductInCart": false,
       "productsInCart": 0,
-      "productsAvailable": 11,
+      "productsAvailable": 7,
       "id": 9
     }
   ]

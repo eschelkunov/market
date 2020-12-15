@@ -15,3 +15,10 @@ export const getProductsInCartIDs = createSelector(
     return products.map((product) => product.id);
   }
 );
+
+export const getProductsLack = createSelector(getProducts, (products) => {
+  return products.filter(
+    (product) =>
+      Number(product.productsLack) || Number(product.productsAvailable) === 0
+  );
+});

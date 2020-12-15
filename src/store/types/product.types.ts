@@ -1,14 +1,16 @@
 import {
   ADD_PRODUCT,
-  ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
   INCREASE_COUNT,
   DECREASE_COUNT,
   BUY_PRODUCTS,
   SET_PRODUCTS,
+  EDIT_PRODUCT,
+  DELETE_PRODUCT,
 } from "../constants";
 
 export interface IFormData {
+  id?: number;
   productName: string;
   productPrice: number;
   imageURL: string;
@@ -19,6 +21,7 @@ export interface IProductFormData extends IFormData {
   isProductInCart: boolean;
   productsInCart: number;
   productsAvailable: number;
+  productsLack?: number;
 }
 
 export interface IProduct {
@@ -42,13 +45,18 @@ export interface IAddProduct {
   payload: IProduct;
 }
 
-interface IAddProductToCart {
-  type: typeof ADD_PRODUCT_TO_CART;
-  id: number;
+export interface IEditProduct {
+  type: typeof EDIT_PRODUCT;
+  payload: IProduct;
 }
 
 interface IRemoveProductFromCart {
   type: typeof REMOVE_PRODUCT_FROM_CART;
+  id: number;
+}
+
+interface IDeleteProduct {
+  type: typeof DELETE_PRODUCT;
   id: number;
 }
 
@@ -70,7 +78,8 @@ interface IBuyProducts {
 export type ProductActionTypes =
   | ISetProducts
   | IAddProduct
-  | IAddProductToCart
+  | IEditProduct
+  | IDeleteProduct
   | IRemoveProductFromCart
   | IIncreaseCount
   | IDecreaseCount

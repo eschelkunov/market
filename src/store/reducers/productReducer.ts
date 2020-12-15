@@ -1,9 +1,10 @@
 import { Reducer } from "redux";
 import {
   ADD_PRODUCT,
-  ADD_PRODUCT_TO_CART,
   BUY_PRODUCTS,
   DECREASE_COUNT,
+  DELETE_PRODUCT,
+  EDIT_PRODUCT,
   INCREASE_COUNT,
   REMOVE_PRODUCT_FROM_CART,
   SET_PRODUCTS,
@@ -30,16 +31,17 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
         ...state,
         products: [...state.products, action.payload],
       };
-    case ADD_PRODUCT_TO_CART:
-      const indexToAdd = state.products.findIndex(
-        (product) => product.id === action.id
-      );
-      const productsCopyAdd = [...state.products];
-      productsCopyAdd[indexToAdd].isProductInCart = true;
-      productsCopyAdd[indexToAdd].productsInCart += 1;
+    case EDIT_PRODUCT:
       return {
         ...state,
-        products: productsCopyAdd,
+        products: state.products.map((product) =>
+          product.id === action.payload.id ? action.payload : product
+        ),
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter((product) => product.id !== action.id),
       };
     case REMOVE_PRODUCT_FROM_CART:
       const indexToRemove = state.products.findIndex(
@@ -57,6 +59,7 @@ export const productReducer: Reducer<IStore, ProductActionTypes> = (
         (product) => product.id === action.id
       );
       const productsInCartIncr = [...state.products];
+      productsInCartIncr[indexIncr].isProductInCart = true;
       productsInCartIncr[indexIncr].productsInCart += 1;
       return {
         ...state,

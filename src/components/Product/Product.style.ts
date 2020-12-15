@@ -23,3 +23,9 @@ export const SCIconNotAvailable = styled.div`
   align-self: center;
   color: #f44336;
 `;
+
+export const SCImg = styled.img`
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+`;

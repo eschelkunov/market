@@ -21,18 +21,23 @@ content-type: application/json
 ####################
 
 // Test: Edit product
-PUT http://localhost:3000/products/4
+PUT http://localhost:3000/products/1
 Content-Type: application/json
 
 {
-    "title": "UPDATED!!!!!!!",
-    "completed": false
+    "productName":"Coffe",
+    "productPrice":40,
+    "imageURL":"https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+    "isProductInCart":false,
+    "productsInCart":0,
+    "productsAvailable":11,
+    "id": 1
 }
 
 #######
 
 // Test: Delete product from stock
-DELETE http://localhost:3000/products/5
+DELETE http://localhost:3000/products/14
 Content-Type: application/json
 
 
