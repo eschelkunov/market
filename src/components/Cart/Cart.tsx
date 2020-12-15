@@ -20,9 +20,9 @@ import { MUIAlert } from "../Alert/Alert";
 
 interface ICartProps {
   cartProducts: IProduct[];
-  removeProductFromCart: (productId: number) => void;
-  increaseCount: (productId: number) => void;
-  decreaseCount: (productId: number) => void;
+  removeProductFromCart: (id: number) => void;
+  increaseProductCount: (id: number) => void;
+  decreaseProductCount: (id: number) => void;
   buyProducts: (products: number[]) => void;
   cartProductsIDs: number[];
 }
@@ -31,8 +31,8 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
   cartProducts,
   cartProductsIDs,
   removeProductFromCart,
-  increaseCount,
-  decreaseCount,
+  increaseProductCount,
+  decreaseProductCount,
   buyProducts,
 }) => {
   const [showAlert, setShowAlert] = useState(false);
@@ -61,25 +61,25 @@ export const Cart: React.FunctionComponent<ICartProps> = ({
               {cartProducts.map(
                 (
                   {
+                    id,
                     productName,
                     productPrice,
-                    productId,
                     productsInCart,
                     productsAvailable,
                   },
                   i
                 ) => (
-                  <div key={productId}>
+                  <div key={id}>
                     <SCWrapper>
                       <CartItem
                         index={i}
-                        productId={productId}
+                        id={id}
                         productName={productName}
                         productPrice={productPrice}
                         productsInCart={productsInCart}
                         productsAvailable={productsAvailable}
-                        increaseCount={increaseCount}
-                        decreaseCount={decreaseCount}
+                        increaseProductCount={increaseProductCount}
+                        decreaseProductCount={decreaseProductCount}
                         removeProductFromCart={removeProductFromCart}
                       />
                     </SCWrapper>

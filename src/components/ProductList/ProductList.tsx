@@ -9,12 +9,12 @@ import { SCProductList, SCContentWrapper } from "./ProductList.style";
 
 interface IProductListProps {
   products: IProduct[];
-  addProductToCart: (productId: number) => void;
+  increaseProductCount: (id: number) => void;
 }
 
 export const ProductList: React.FunctionComponent<IProductListProps> = ({
   products,
-  addProductToCart,
+  increaseProductCount,
 }) => {
   const history = useHistory();
 
@@ -22,7 +22,7 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
     if (alreadyInCart) {
       history.push(CART);
     } else {
-      addProductToCart(id);
+      increaseProductCount(id);
     }
   };
 
@@ -33,21 +33,22 @@ export const ProductList: React.FunctionComponent<IProductListProps> = ({
         <SCProductList>
           {products.map(
             ({
-              productId,
+              id,
               imageURL,
               productName,
               productPrice,
               isProductInCart,
               productsAvailable,
+              productsInCart,
             }) => (
               <Product
-                key={productId}
+                key={id}
                 imageURL={imageURL}
                 productName={productName}
                 productPrice={productPrice}
                 isItemInCart={isProductInCart}
                 productsAvailable={productsAvailable}
-                onAdd={() => onAddToCart(productId, isProductInCart)}
+                onAdd={() => onAddToCart(id, isProductInCart)}
               />
             )
           )}

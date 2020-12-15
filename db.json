@@ -1,0 +1,91 @@
+{
+  "products": [
+    {
+      "productName": "Coffe",
+      "productPrice": 45,
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 2,
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsLack": 0,
+      "id": 1
+    },
+    {
+      "productName": "Coffe with Milk",
+      "productPrice": 45,
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 0,
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsLack": 0,
+      "id": 2
+    },
+    {
+      "productName": "Capuccino",
+      "productPrice": 50,
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 3,
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsLack": 0,
+      "id": 3
+    },
+    {
+      "productName": "Chocolate",
+      "productPrice": 60,
+      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsAvailable": 5,
+      "productsLack": 0,
+      "id": 4
+    },
+    {
+      "productName": "Latte",
+      "productPrice": 40,
+      "imageURL": "https://www.brian-coffee-spot.com/wp-content/uploads/2016/10/Thumbnail-Sumerian-Coffee-DSC_6295-200x200.jpg",
+      "productsAvailable": 5,
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsLack": 0,
+      "id": 5
+    },
+    {
+      "productName": "Americano",
+      "productPrice": 50,
+      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "productsAvailable": 4,
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsLack": 0,
+      "id": 6
+    },
+    {
+      "productName": "Black Tea",
+      "productPrice": 30,
+      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsAvailable": 3,
+      "id": 7
+    },
+    {
+      "productName": "Tea with Lemon",
+      "productPrice": 35,
+      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsAvailable": 6,
+      "id": 8
+    },
+    {
+      "productName": "Green Tea",
+      "productPrice": 30,
+      "imageURL": "https://onlinejpgtools.com/images/examples-onlinejpgtools/coffee-resized.jpg",
+      "isProductInCart": false,
+      "productsInCart": 0,
+      "productsAvailable": 7,
+      "id": 9
+    }
+  ]
+}

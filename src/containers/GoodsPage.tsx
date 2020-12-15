@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { ProductList } from "../components/ProductList/ProductList";
-import { addProductToCart } from "../store/actions/productActions";
+import { increaseProductCount } from "../store/actions/productActions";
 import { getProducts } from "../store/selectors/productSelectors";
 import { IStore } from "../store/types/store.types";
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state: IStore) => ({
 });
 
 const mapDispatchToProps = {
-  addProductToCart,
+  increaseProductCount,
 };
 
 export const GoodsPage = connect(

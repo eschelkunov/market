@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import { IStore } from "../store/types/store.types";
 import {
   removeProductFromCart,
-  increaseCount,
-  decreaseCount,
+  increaseProductCount,
+  decreaseProductCount,
   buyProducts,
 } from "../store/actions/productActions";
 import { Cart } from "../components/Cart/Cart";
@@ -16,8 +16,8 @@ const mapStateToProps = (state: IStore) => ({
 
 const mapDispatchToProps = {
   removeProductFromCart,
-  increaseCount,
-  decreaseCount,
+  increaseProductCount,
+  decreaseProductCount,
   buyProducts,
 };
 

@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { IStore } from "../../store/types/store.types";
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
   cartProducts,
 }) => {
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
@@ -57,7 +57,7 @@ const PageHeader: React.FunctionComponent<IPageHeaderProps> = ({
     }
   };
 
-  const onMenuClick = (event: SyntheticEvent) => {
+  const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
